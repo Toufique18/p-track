@@ -1,6 +1,95 @@
 import React from 'react';
 
 const Addproduct = () => {
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.target;
+
+        const Name = form.name.value;
+        const image = form.image.files[0];
+        const description = form.description.value;
+        const price = form.price.value;
+        const category = form.category.value;
+        const brand = form.brand.value;
+        const email = userEmail;
+        const creatorNames = creatorName;
+        const creatorImages = creatorImage;
+
+        try {
+            // Step 1: Upload image to image hosting service
+            const image_url = await uploadImage(image);
+
+            // Step 2: Submit contest data with image URL
+            const contestData = {
+                contestName,
+                image: image_url, // Use the hosted image URL
+                description,
+                price,
+                prizeMoney,
+                taskInstruction,
+                selectedTag,
+                deadline,
+                email,
+                creatorNames,
+                creatorImages,
+            };
+
+            const response = await fetch("", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(contestData),
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Contest added successfully",
+                    icon: "success",
+                    confirmButtonText: "Close",
+                });
+                form.reset();
+                setDeadline(null);
+            } else {
+                throw new Error("Failed to add contest");
+            }
+        } catch (error) {
+            console.error("Error adding contest:", error);
+            Swal.fire({
+                title: "Error!",
+                text: "An error occurred while adding the contest",
+                icon: "error",
+                confirmButtonText: "Close",
+            });
+        }
+    };
+     // Function to upload image to image hosting service
+     const uploadImage = async (imageFile) => {
+        try {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+
+            const response = await fetch(`https://api.imgbb.com/1/upload?key=e04b2c2c85ddbc2b9379722536771dca`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.data.display_url; // Return the hosted image URL
+            } else {
+                throw new Error("Failed to upload image");
+            }
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            throw error;
+        }
+    };
+
+
+
     return (
         <div>
             <h1>hi</h1>
