@@ -15,7 +15,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/products?page=${currentPage}&limit=10&search=${searchTerm}&brands=${selectedBrands.join(',')}&categories=${selectedCategories.join(',')}&priceRange=${priceRange}&sort=${sortOption}`);
+                const response = await fetch(`https://p-track-server.vercel.app/products?page=${currentPage}&limit=10&search=${searchTerm}&brands=${selectedBrands.join(',')}&categories=${selectedCategories.join(',')}&priceRange=${priceRange}&sort=${sortOption}`);
                 const result = await response.json();
 
                 setData(result.data);

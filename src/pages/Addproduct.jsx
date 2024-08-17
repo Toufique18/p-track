@@ -1,72 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const Addproduct = () => {
+    const [brands, setBrands] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedBrand, setSelectedBrand] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    useEffect(() => {
+        // Fetch brands and categories (or set them statically if they don't change)
+        setBrands(["TechWave", "SoundMaster", "BrightSmile", "PureBreeze", "SafeGuard", "PowerFix"]);
+        setCategories(["Electronics", "Wearables", "Personal Care", "Home Appliances", "Tools", "Home Security", "Home Automation"]);
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
 
-        const Name = form.name.value;
+        const name = form.name.value;
         const image = form.image.files[0];
         const description = form.description.value;
         const price = form.price.value;
-        const category = form.category.value;
-        const brand = form.brand.value;
-        const email = userEmail;
-        const creatorNames = creatorName;
-        const creatorImages = creatorImage;
+        const category = selectedCategory;
+        const brand = selectedBrand;
+        const ratings = form.ratings.value;
+        const creationDateTime = form.creationDate.value;
+        
 
         try {
             // Step 1: Upload image to image hosting service
             const image_url = await uploadImage(image);
 
-            // Step 2: Submit contest data with image URL
-            const contestData = {
-                contestName,
-                image: image_url, // Use the hosted image URL
+            // Step 2: Submit product data with image URL
+            const productData = {
+                productName: name,
+                productImage: image_url, // Use the hosted image URL
                 description,
                 price,
-                prizeMoney,
-                taskInstruction,
-                selectedTag,
-                deadline,
-                email,
-                creatorNames,
-                creatorImages,
+                category,
+                brandName: brand,
+                ratings,
+                creationDateTime,
+                
             };
 
-            const response = await fetch("", {
+            const response = await fetch("http://localhost:5000/product", { // Update with your backend endpoint
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(contestData),
+                body: JSON.stringify(productData),
             });
 
             if (response.ok) {
                 Swal.fire({
                     title: "Success!",
-                    text: "Contest added successfully",
+                    text: "Product added successfully",
                     icon: "success",
                     confirmButtonText: "Close",
                 });
                 form.reset();
-                setDeadline(null);
             } else {
-                throw new Error("Failed to add contest");
+                throw new Error("Failed to add product");
             }
         } catch (error) {
-            console.error("Error adding contest:", error);
+            console.error("Error adding product:", error);
             Swal.fire({
                 title: "Error!",
-                text: "An error occurred while adding the contest",
+                text: "An error occurred while adding the product",
                 icon: "error",
                 confirmButtonText: "Close",
             });
         }
     };
-     // Function to upload image to image hosting service
-     const uploadImage = async (imageFile) => {
+
+    // Function to upload image to image hosting service
+    const uploadImage = async (imageFile) => {
         try {
             const formData = new FormData();
             formData.append("image", imageFile);
@@ -88,114 +97,107 @@ const Addproduct = () => {
         }
     };
 
-
-
     return (
         <div>
-            <h1>hi</h1>
-            <form className="max-w-lg mx-auto p-8 space-y-6 bg-base-200 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center">Add New Product</h2>
-      <div className="form-control">
-        <label className="label font-semibold">Product Name</label>
-        <input
-          type="text"
-          name="name"
-          //value={product.name}
-          //onChange={handleChange}
-          placeholder='Enter product name'
-          className="input input-bordered w-full"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Product Image</label>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          //onChange={handleFileChange}
-          className="file-input file-input-bordered w-full"
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Description</label>
-        <textarea
-          name="description"
-          //value={product.description}
-          //onChange={handleChange}
-          placeholder='Description'
-          className="textarea textarea-bordered w-full"
-          rows="4"
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Price</label>
-        <input
-          type="number"
-          name="price"
-          placeholder='Enter price'
-          //value={product.price}
-          //onChange={handleChange}
-          className="input input-bordered w-full"
-          min="0"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Category</label>
-        <input
-          type="text"
-          name="category"
-          //value={product.category}
-          //onChange={handleChange}
-          placeholder='Enter price'
-          className="input input-bordered w-full"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Brand Name</label>
-        <input
-          type="text"
-          name="brand"
-          //value={product.brand}
-          //onChange={handleChange}
-          placeholder='Enter brand name'
-          className="input input-bordered w-full"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Ratings</label>
-        <input
-          type="number"
-          name="ratings"
-          //value={product.ratings}
-          //onChange={handleChange}
-          className="input input-bordered w-full"
-          min="0"
-          max="5"
-          step="0.1"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label font-semibold">Product Creation Date and Time</label>
-        <input
-          type="datetime-local"
-          name="creationDate"
-          //value={product.creationDate}
-          //onChange={handleChange}
-          className="input input-bordered w-full"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <button type="submit" className="btn btn-primary w-full mt-4">
-          Add Product
-        </button>
-      </div>
-    </form>
+            <h1>Add New Product</h1>
+            <form className="max-w-lg mx-auto p-8 space-y-6 bg-base-200 rounded-lg shadow-md" onSubmit={handleSubmit}>
+                <h2 className="text-2xl font-bold text-center">Add New Product</h2>
+                <div className="form-control">
+                    <label className="label font-semibold">Product Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder='Enter product name'
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Product Image</label>
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        className="file-input file-input-bordered w-full"
+                    />
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Description</label>
+                    <textarea
+                        name="description"
+                        placeholder='Description'
+                        className="textarea textarea-bordered w-full"
+                        rows="4"
+                    />
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Price</label>
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder='Enter price'
+                        className="input input-bordered w-full"
+                        min="0"
+                        required
+                    />
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Category</label>
+                    <select
+                        name="category"
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="select select-bordered w-full"
+                        required
+                    >
+                        <option value="">Select a category</option>
+                        {categories.map((category) => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Brand Name</label>
+                    <select
+                        name="brand"
+                        value={selectedBrand}
+                        onChange={(e) => setSelectedBrand(e.target.value)}
+                        className="select select-bordered w-full"
+                        required
+                    >
+                        <option value="">Select a brand</option>
+                        {brands.map((brand) => (
+                            <option key={brand} value={brand}>{brand}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Ratings</label>
+                    <input
+                        type="number"
+                        name="ratings"
+                        className="input input-bordered w-full"
+                        min="0"
+                        max="5"
+                        step="0.1"
+                        required
+                    />
+                </div>
+                <div className="form-control">
+                    <label className="label font-semibold">Product Creation Date and Time</label>
+                    <input
+                        type="datetime-local"
+                        name="creationDate"
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
+                <div className="form-control">
+                    <button type="submit" className="btn btn-primary w-full mt-4">
+                        Add Product
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };
