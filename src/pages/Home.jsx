@@ -153,7 +153,7 @@ const Home = () => {
                         <div className="mb-4">
                             <h3 className="text-lg font-semibold">Categories</h3>
                             <div className="flex flex-col">
-                                {["Electronics", "Wearables", "Personal Care", "Home Appliances", "Tools", "Home Security", "Home Automation"].map((category) => (
+                                {["Electronics", "Wearables", "Personal Care", "Home Appliances", "Tools", "Home Security", "Home Automation", "Home Entertainment", "Home Decor", "Outdoor"].map((category) => (
                                     <label key={category} className="flex items-center">
                                         <input
                                             type="checkbox"
