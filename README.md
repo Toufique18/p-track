@@ -13,8 +13,8 @@ This repository contains the frontend code for the product filtering and sorting
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/frontend-repo.git
-   cd frontend-repo
+   git clone https://github.com/Toufique18/p-track.git
+   
 2. **Install dependencies:**
    npm install
 3. Environment Setup:
