@@ -67,11 +67,11 @@ const Home = () => {
     };
 
     return (
-        <div className="container mx-auto lg:px-12">
-            <div className="mb-4 flex">
+        <div className="container mx-auto lg:px-12 px-5">
+            <div className="mb-4 lg:flex flex-1">
                 <input
                     type="text"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full mb-2"
                     placeholder="Search products..."
                     value={searchTerm}
                     onChange={handleSearchChange}

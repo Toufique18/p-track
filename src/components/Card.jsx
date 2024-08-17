@@ -10,8 +10,8 @@ const Card = ({ card }) => {
 
     return (
         <div
-            className={`card w-full bg-base-100 shadow-xl transform transition-transform duration-500 ease-out ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`card w-full bg-base-100 shadow-2xl shadow-violet-300 transform transition-transform duration-500 ease-out ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
             }`}
         >
             <figure className="px-10 pt-10">
