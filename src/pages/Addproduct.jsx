@@ -44,7 +44,7 @@ const Addproduct = () => {
                 
             };
 
-            const response = await fetch("http://localhost:5000/product", { // Update with your backend endpoint
+            const response = await fetch("https://p-track-server.vercel.app/product", { // Update with your backend endpoint
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
