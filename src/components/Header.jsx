@@ -5,7 +5,7 @@ import "tailwindcss/tailwind.css";
 //import 'react-tooltip/dist/react-tooltip.css'
 // import { Tooltip } from "react-tooltip";
 // import { AuthContext } from "../provider/AuthProvider";
-//import hub from "../assets/Images/png/logo-no-background.png"
+import hub from "../assets/image/shopflex-logo-zip-file/png/logo-no-background.png"
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
@@ -23,8 +23,8 @@ const Header = () => {
     const userImage = user ? user.photoURL : '';
     const links = <>
 
-        <li><NavLink className={({ isActive }) => isActive ? "btn text-purple-600 border-2 border-purple-500" : "text-neutral-900 text-opacity-80 text-lg font-normal font-['Work Sans']"} to="/">Home</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? "btn text-purple-600 border-2 border-purple-500" : "text-neutral-900 text-opacity-80 text-lg font-normal font-['Work Sans']"} to="/addProduct">Add Products</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "btn text-purple-600 border-b-2 border-b-purple-500 text-lg font-normal font-['Work Sans']" : "text-neutral-900 text-opacity-80 text-lg font-normal font-['Work Sans']"} to="/">Home</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? "btn text-purple-600 border-b-2 border-b-purple-500 text-lg font-normal font-['Work Sans']" : "text-neutral-900 text-opacity-80 text-lg font-normal font-['Work Sans']"} to="/addProduct">Add Products</NavLink></li>
 
 
 
@@ -44,7 +44,7 @@ const Header = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className=" text-xl"><img className="animate-pulse " alt="" />P-TRACK</a>
+                    <a className=" text-xl"><img className="animate-pulse h-12"   alt="" src={hub} /></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
