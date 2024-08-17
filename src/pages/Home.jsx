@@ -224,7 +224,7 @@ const Home = () => {
                         <div className="mb-4">
                             <h3 className="text-lg font-semibold">Categories</h3>
                             <div className="flex flex-col">
-                                {["Electronics", "Wearables", "Personal Care", "Home Appliances", "Tools", "Home Security", "Home Automation"].map((category) => (
+                                {["Electronics", "Wearables", "Personal Care", "Home Appliances", "Tools", "Home Security", "Home Automation", "Outdoor", "Home Decor", "Home Entertainment"].map((category) => (
                                     <label key={category} className="flex items-center">
                                         <input
                                             type="checkbox"
@@ -246,9 +246,8 @@ const Home = () => {
                                 onChange={handlePriceRangeChange}
                                 className="select select-bordered w-full"
                             >
-                                <option value="">Select Price Range</option>
-                                <option value="0-50">$0 - $50</option>
-                                <option value="51-100">$51 - $100</option>
+                                <option value="">Select Price Range(All)</option>
+                                <option value="0-100">$0 - $100</option>
                                 <option value="101-200">$101 - $200</option>
                                 <option value="201-500">$201 - $500</option>
                                 <option value="500+">$500+</option>
