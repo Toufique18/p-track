@@ -1,6 +1,27 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+# Frontend Project Setup
+
+## Overview
+This repository contains the frontend code for the product filtering and sorting web application.
+
+## Prerequisites
+- **Node.js** (version 14.x or higher)
+- **npm** (version 6.x or higher)
+
+## Installation Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Toufique18/p-track.git
+   
+2. **Install dependencies:**
+   npm install
+3. Environment Setup:
+   Create a .env file in the root directory.
+4. Running the Project Locally
+   npm start
+   npm run dev
 
 Currently, two official plugins are available:
 
